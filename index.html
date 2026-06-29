@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Recipe Finder</h1>
+    <p>Search recipes or add your own favorite meal.</p>
+  </header>
 
+  <main>
+    <section class="search-section">
+      <input type="text" id="searchInput" placeholder="Search for a recipe..." />
+    </section>
+
+    <section class="form-section">
+      <h2>Add Your Own Recipe</h2>
+
+      <input type="text" id="recipeName" placeholder="Recipe name" />
+      <textarea id="ingredients" placeholder="Ingredients"></textarea>
+      <textarea id="instructions" placeholder="Instructions"></textarea>
+
+      <button onclick="addRecipe()">Add Recipe</button>
+    </section>
+
+    <section>
+      <h2>Recipes</h2>
+      <div id="recipeList" class="recipe-list"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
