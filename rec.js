@@ -16,79 +16,82 @@ let recipes = [
   }
 ];
 
-function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+document.addEventListener("DOMContentLoaded", function () {
+  const loginScreen = document.getElementById("loginScreen");
+  const websiteContent = document.getElementById("websiteContent");
+  const recipeList = document.getElementById("recipeList");
+  const searchInput = document.getElementById("searchInput");
 
-  if (username === "" || password === "") {
-    alert("Please enter a username and password.");
-    return;
-  }
+  window.login = function () {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-  document.getElementById("loginScreen").style.display = "none";
-  document.getElementById("websiteContent").style.display = "block";
+    if (username === "" || password === "") {
+      alert("Please enter a username and password.");
+      return;
+    }
 
-  displayRecipes(recipes);
-}
+    loginScreen.style.display = "none";
+    websiteContent.style.display = "block";
 
-function logout() {
-  document.getElementById("loginScreen").style.display = "flex";
-  document.getElementById("websiteContent").style.display = "none";
-
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
-}
-
-const recipeList = document.getElementById("recipeList");
-
-function displayRecipes(recipeArray) {
-  recipeList.innerHTML = "";
-
-  recipeArray.forEach(function(recipe) {
-    const card = document.createElement("div");
-    card.className = "recipe-card";
-
-    card.innerHTML = `
-      <h3>${recipe.name}</h3>
-      <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
-      <p><strong>Instructions:</strong> ${recipe.instructions}</p>
-    `;
-
-    recipeList.appendChild(card);
-  });
-}
-
-function addRecipe() {
-  const name = document.getElementById("recipeName").value;
-  const ingredients = document.getElementById("ingredients").value;
-  const instructions = document.getElementById("instructions").value;
-
-  if (name === "" || ingredients === "" || instructions === "") {
-    alert("Please fill out all fields.");
-    return;
-  }
-
-  const newRecipe = {
-    name: name,
-    ingredients: ingredients,
-    instructions: instructions
+    displayRecipes(recipes);
   };
 
-  recipes.push(newRecipe);
+  window.logout = function () {
+    loginScreen.style.display = "flex";
+    websiteContent.style.display = "none";
 
-  document.getElementById("recipeName").value = "";
-  document.getElementById("ingredients").value = "";
-  document.getElementById("instructions").value = "";
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+  };
 
-  displayRecipes(recipes);
-}
+  window.addRecipe = function () {
+    const name = document.getElementById("recipeName").value;
+    const ingredients = document.getElementById("ingredients").value;
+    const instructions = document.getElementById("instructions").value;
 
-document.getElementById("searchInput").addEventListener("input", function() {
-  const searchText = this.value.toLowerCase();
+    if (name === "" || ingredients === "" || instructions === "") {
+      alert("Please fill out all fields.");
+      return;
+    }
 
-  const filteredRecipes = recipes.filter(function(recipe) {
-    return recipe.name.toLowerCase().includes(searchText);
+    recipes.push({
+      name: name,
+      ingredients: ingredients,
+      instructions: instructions
+    });
+
+    document.getElementById("recipeName").value = "";
+    document.getElementById("ingredients").value = "";
+    document.getElementById("instructions").value = "";
+
+    displayRecipes(recipes);
+  };
+
+  function displayRecipes(recipeArray) {
+    recipeList.innerHTML = "";
+
+    recipeArray.forEach(function (recipe) {
+      const card = document.createElement("div");
+      card.className = "recipe-card";
+
+      card.innerHTML = `
+        <h3>${recipe.name}</h3>
+        <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+        <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+      `;
+
+      recipeList.appendChild(card);
+    });
+  }
+
+  searchInput.addEventListener("input", function () {
+    const searchText = searchInput.value.toLowerCase();
+
+    const filteredRecipes = recipes.filter(function (recipe) {
+      return recipe.name.toLowerCase().includes(searchText);
+    });
+
+    displayRecipes(filteredRecipes);
   });
-
-  displayRecipes(filteredRecipes);
 });
