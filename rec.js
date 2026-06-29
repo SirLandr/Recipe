@@ -16,8 +16,30 @@ let recipes = [
   }
 ];
 
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (username === "" || password === "") {
+    alert("Please enter a username and password.");
+    return;
+  }
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("websiteContent").style.display = "block";
+
+  displayRecipes(recipes);
+}
+
+function logout() {
+  document.getElementById("loginScreen").style.display = "flex";
+  document.getElementById("websiteContent").style.display = "none";
+
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+}
+
 const recipeList = document.getElementById("recipeList");
-const searchInput = document.getElementById("searchInput");
 
 function displayRecipes(recipeArray) {
   recipeList.innerHTML = "";
@@ -61,8 +83,8 @@ function addRecipe() {
   displayRecipes(recipes);
 }
 
-searchInput.addEventListener("input", function() {
-  const searchText = searchInput.value.toLowerCase();
+document.getElementById("searchInput").addEventListener("input", function() {
+  const searchText = this.value.toLowerCase();
 
   const filteredRecipes = recipes.filter(function(recipe) {
     return recipe.name.toLowerCase().includes(searchText);
@@ -70,5 +92,3 @@ searchInput.addEventListener("input", function() {
 
   displayRecipes(filteredRecipes);
 });
-
-displayRecipes(recipes);
