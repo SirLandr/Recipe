@@ -1,108 +1,223 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background-color: #f8f3ed;
-  color: #333;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f3ed;
+    color: #333333;
 }
 
 header {
-  background-color: #d35400;
-  color: white;
-  text-align: center;
-  padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 25px 8%;
+
+    background-color: #d35400;
+    color: white;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
 }
 
 main {
-  width: 90%;
-  max-width: 900px;
-  margin: 20px auto;
+    width: 90%;
+    max-width: 950px;
+
+    margin: 30px auto;
+}
+
+button {
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #d35400;
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a84300;
+}
+
+header button {
+    background-color: white;
+    color: #d35400;
+}
+
+header button:hover {
+    background-color: #f3e1d6;
 }
 
 input,
 textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+    width: 100%;
+
+    margin: 7px 0 16px;
+    padding: 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 16px;
 }
 
 textarea {
-  height: 90px;
+    min-height: 110px;
+    resize: vertical;
 }
 
-button {
-  background-color: #d35400;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
-  cursor: pointer;
+label {
+    display: block;
+
+    margin-top: 8px;
+
+    font-weight: bold;
 }
 
-button:hover {
-  background-color: #a84300;
+.website-content {
+    display: none;
 }
 
-.form-section,
-.search-section {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-}
+.login-screen {
+    min-height: 100vh;
 
-.recipe-list {
-  display: grid;
-  gap: 15px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.recipe-card {
-  background: white;
-  padding: 15px;
-  border-left: 6px solid #d35400;
-  border-radius: 8px;
+    padding: 20px;
 
-  .login-screen {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f8f3ed;
+    background-color: #f8f3ed;
 }
 
 .login-box {
-  background: white;
-  padding: 30px;
-  width: 300px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+
+    padding: 35px;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+    text-align: center;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
 }
 
 .login-box h1 {
-  color: #d35400;
+    margin-top: 0;
+
+    color: #d35400;
+}
+
+.login-box button {
+    width: 100%;
 }
 
 .hint {
-  font-size: 12px;
-  color: gray;
-}
+    margin-bottom: 0;
+
+    color: #777777;
+    font-size: 13px;
 }
 
-.support-box{
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.15);
+.search-section,
+.form-section,
+.recipes-section,
+.support-box {
+    margin-bottom: 25px;
+    padding: 25px;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
-.support-box h2{
-    color:#d35400;
+.search-section h2,
+.form-section h2,
+.recipes-section h2,
+.support-box h2 {
+    margin-top: 0;
+
+    color: #d35400;
 }
 
-.support-box button{
-    margin-top:20px;
+.recipe-list {
+    display: grid;
+    gap: 18px;
+}
+
+.recipe-card {
+    padding: 20px;
+
+    border-left: 6px solid #d35400;
+    border-radius: 8px;
+
+    background-color: #fffaf6;
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+
+    color: #d35400;
+}
+
+.support-question {
+    margin: 20px 0;
+    padding: 15px;
+
+    border-left: 5px solid #d35400;
+
+    background-color: #fffaf6;
+}
+
+.support-question h3 {
+    margin-top: 0;
+}
+
+.no-recipes {
+    padding: 15px;
+
+    border-radius: 6px;
+
+    background-color: #fff3e8;
+}
+
+@media screen and (max-width: 650px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav button {
+        flex: 1;
+    }
 }
