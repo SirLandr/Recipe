@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Recipe Finder</title>
 
@@ -20,19 +24,26 @@
 
             <p>Please log in to continue.</p>
 
+            <label for="username">Username</label>
+
             <input
                 type="text"
                 id="username"
-                placeholder="Username"
+                placeholder="Enter your username"
             >
+
+            <label for="password">Password</label>
 
             <input
                 type="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Enter your password"
             >
 
-            <button type="button" onclick="login()">
+            <button
+                type="button"
+                onclick="login()"
+            >
                 Login
             </button>
 
@@ -55,7 +66,7 @@
                 <h1>Recipe Finder</h1>
 
                 <p>
-                    Search for recipes or add one of your own.
+                    Search recipes or add one of your own.
                 </p>
 
             </div>
@@ -82,6 +93,30 @@
 
 
         <main>
+
+            <!-- Recipe of the Day -->
+            <section class="recipe-day">
+
+                <p class="daily-label">
+                    Featured Recipe
+                </p>
+
+                <h2>Recipe of the Day</h2>
+
+                <h3 id="dailyRecipeName"></h3>
+
+                <p>
+                    <strong>Ingredients:</strong>
+                    <span id="dailyIngredients"></span>
+                </p>
+
+                <p>
+                    <strong>Instructions:</strong>
+                    <span id="dailyInstructions"></span>
+                </p>
+
+            </section>
+
 
             <!-- Search Section -->
             <section class="search-section">
