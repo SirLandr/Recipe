@@ -1,149 +1,166 @@
-// ------------------------------
-// Recipe Data
-// ------------------------------
-let recipes = [
-    {
-        name: "Spaghetti",
-        ingredients: "Noodles, Tomato Sauce, Ground Beef, Cheese",
-        instructions: "Cook noodles, prepare the sauce, combine everything, and serve."
-    },
-    {
-        name: "Chicken Tacos",
-        ingredients: "Chicken, Tortillas, Lettuce, Cheese, Salsa",
-        instructions: "Cook the chicken, place it in tortillas, add toppings, and enjoy."
-    },
-    {
-        name: "Pancakes",
-        ingredients: "Flour, Eggs, Milk, Sugar, Baking Powder",
-        instructions: "Mix all ingredients together and cook on a skillet."
-    }
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// ------------------------------
-// Wait for page to load
-// ------------------------------
-document.addEventListener("DOMContentLoaded", function () {
+    <title>Recipe Finder</title>
 
-    const loginScreen = document.getElementById("loginScreen");
-    const websiteContent = document.getElementById("websiteContent");
-    const recipeList = document.getElementById("recipeList");
-    const searchInput = document.getElementById("searchInput");
+    <link rel="stylesheet" href="rec.css">
+</head>
 
-    // Stay logged in
-    if (localStorage.getItem("loggedIn") === "true") {
+<body>
 
-        loginScreen.style.display = "none";
-        websiteContent.style.display = "block";
+    <!-- Login Screen -->
+    <section id="loginScreen" class="login-screen">
 
-        displayRecipes(recipes);
-    }
+        <div class="login-box">
 
-    // ------------------------------
-    // Login
-    // ------------------------------
-    window.login = function () {
+            <h1>Recipe Finder</h1>
 
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+            <p>Please log in to continue.</p>
 
-        if (username === "" || password === "") {
-            alert("Please enter a username and password.");
-            return;
-        }
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+            >
 
-        localStorage.setItem("loggedIn", "true");
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
 
-        loginScreen.style.display = "none";
-        websiteContent.style.display = "block";
+            <button type="button" onclick="login()">
+                Login
+            </button>
 
-        displayRecipes(recipes);
-    };
+            <p class="hint">
+                Enter any username and password.
+            </p>
 
-    // ------------------------------
-    // Logout
-    // ------------------------------
-    window.logout = function () {
+        </div>
 
-        localStorage.removeItem("loggedIn");
+    </section>
 
-        loginScreen.style.display = "flex";
-        websiteContent.style.display = "none";
 
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-    };
+    <!-- Main Website -->
+    <section id="websiteContent" class="website-content">
 
-    // ------------------------------
-    // Add Recipe
-    // ------------------------------
-    window.addRecipe = function () {
+        <header>
 
-        const name = document.getElementById("recipeName").value.trim();
-        const ingredients = document.getElementById("ingredients").value.trim();
-        const instructions = document.getElementById("instructions").value.trim();
+            <div class="header-text">
 
-        if (name === "" || ingredients === "" || instructions === "") {
+                <h1>Recipe Finder</h1>
 
-            alert("Please fill out every field.");
-            return;
-        }
+                <p>
+                    Search for recipes or add one of your own.
+                </p>
 
-        recipes.push({
-            name: name,
-            ingredients: ingredients,
-            instructions: instructions
-        });
+            </div>
 
-        document.getElementById("recipeName").value = "";
-        document.getElementById("ingredients").value = "";
-        document.getElementById("instructions").value = "";
+            <nav>
 
-        displayRecipes(recipes);
-    };
+                <button
+                    type="button"
+                    onclick="location.href='Support.html'"
+                >
+                    Support
+                </button>
 
-    // ------------------------------
-    // Search Recipes
-    // ------------------------------
-    if (searchInput) {
+                <button
+                    type="button"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
 
-        searchInput.addEventListener("keyup", function () {
+            </nav>
 
-            const text = this.value.toLowerCase();
+        </header>
 
-            const filteredRecipes = recipes.filter(recipe =>
-                recipe.name.toLowerCase().includes(text)
-            );
 
-            displayRecipes(filteredRecipes);
-        });
+        <main>
 
-    }
+            <!-- Search Section -->
+            <section class="search-section">
 
-    // ------------------------------
-    // Display Recipes
-    // ------------------------------
-    function displayRecipes(recipeArray) {
+                <h2>Search Recipes</h2>
 
-        recipeList.innerHTML = "";
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by recipe name or ingredient"
+                >
 
-        recipeArray.forEach(recipe => {
+            </section>
 
-            const card = document.createElement("div");
 
-            card.className = "recipe-card";
+            <!-- Add Recipe Section -->
+            <section class="form-section">
 
-            card.innerHTML = `
-                <h3>${recipe.name}</h3>
+                <h2>Add Your Own Recipe</h2>
 
-                <p><strong>Ingredients:</strong><br>${recipe.ingredients}</p>
+                <label for="recipeName">
+                    Recipe Name
+                </label>
 
-                <p><strong>Instructions:</strong><br>${recipe.instructions}</p>
-            `;
+                <input
+                    type="text"
+                    id="recipeName"
+                    placeholder="Example: Chocolate Cake"
+                >
 
-            recipeList.appendChild(card);
 
-        });
+                <label for="ingredients">
+                    Ingredients
+                </label>
 
-    }
+                <textarea
+                    id="ingredients"
+                    placeholder="List the ingredients"
+                ></textarea>
 
-});
+
+                <label for="instructions">
+                    Instructions
+                </label>
+
+                <textarea
+                    id="instructions"
+                    placeholder="Explain how to prepare the recipe"
+                ></textarea>
+
+
+                <button
+                    type="button"
+                    onclick="addRecipe()"
+                >
+                    Add Recipe
+                </button>
+
+            </section>
+
+
+            <!-- Recipe List -->
+            <section class="recipes-section">
+
+                <h2>Recipes</h2>
+
+                <div
+                    id="recipeList"
+                    class="recipe-list"
+                ></div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+
+    <script src="rec.js"></script>
+
+</body>
+</html>
