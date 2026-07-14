@@ -1,61 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recipe Finder</title>
-  <link rel="stylesheet" href="rec.css" />
-  <button onclick="location.href='Support.html'">
-    Support
-  </button>
+// ------------------------------
+// Recipe Data
+// ------------------------------
+let recipes = [
+    {
+        name: "Spaghetti",
+        ingredients: "Noodles, Tomato Sauce, Ground Beef, Cheese",
+        instructions: "Cook noodles, prepare the sauce, combine everything, and serve."
+    },
+    {
+        name: "Chicken Tacos",
+        ingredients: "Chicken, Tortillas, Lettuce, Cheese, Salsa",
+        instructions: "Cook the chicken, place it in tortillas, add toppings, and enjoy."
+    },
+    {
+        name: "Pancakes",
+        ingredients: "Flour, Eggs, Milk, Sugar, Baking Powder",
+        instructions: "Mix all ingredients together and cook on a skillet."
+    }
+];
 
-</head>
-<body>
- 
+// ------------------------------
+// Wait for page to load
+// ------------------------------
+document.addEventListener("DOMContentLoaded", function () {
 
-  <section id="loginScreen" class="login-screen">
-    <div class="login-box">
-      <h1>Recipe Finder</h1>
-      <p>Please log in to continue</p>
+    const loginScreen = document.getElementById("loginScreen");
+    const websiteContent = document.getElementById("websiteContent");
+    const recipeList = document.getElementById("recipeList");
+    const searchInput = document.getElementById("searchInput");
 
-      <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password" />
+    // Stay logged in
+    if (localStorage.getItem("loggedIn") === "true") {
 
-      <button onclick="login()">Login</button>
+        loginScreen.style.display = "none";
+        websiteContent.style.display = "block";
 
-      <p class="hint">Use any username and password</p>
-    </div>
-  </section>
+        displayRecipes(recipes);
+    }
 
-  <section id="websiteContent" style="display: none;">
-    <header>
-      <h1>Recipe Finder</h1>
-      <p>Search recipes or add your own favorite meal.</p>
-      <button onclick="logout()">Logout</button>
-    </header>
+    // ------------------------------
+    // Login
+    // ------------------------------
+    window.login = function () {
 
-    <main>
-      <section class="search-section">
-        <input type="text" id="searchInput" placeholder="Search for a recipe..." />
-      </section>
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-      <section class="form-section">
-        <h2>Add Your Own Recipe</h2>
+        if (username === "" || password === "") {
+            alert("Please enter a username and password.");
+            return;
+        }
 
-        <input type="text" id="recipeName" placeholder="Recipe name" />
-        <textarea id="ingredients" placeholder="Ingredients"></textarea>
-        <textarea id="instructions" placeholder="Instructions"></textarea>
+        localStorage.setItem("loggedIn", "true");
 
-        <button onclick="addRecipe()">Add Recipe</button>
-      </section>
+        loginScreen.style.display = "none";
+        websiteContent.style.display = "block";
 
-      <section>
-        <h2>Recipes</h2>
-        <div id="recipeList" class="recipe-list"></div>
-      </section>
-    </main>
-  </section>
+        displayRecipes(recipes);
+    };
 
-  <script src="rec.js"></script>
-</body>
-</html>
+    // ------------------------------
+    // Logout
+    // ------------------------------
+    window.logout = function () {
+
+        localStorage.removeItem("loggedIn");
+
+        loginScreen.style.display = "flex";
+        websiteContent.style.display = "none";
+
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+    };
+
+    // ------------------------------
+    // Add Recipe
+    // ------------------------------
+    window.addRecipe = function () {
+
+        const name = document.getElementById("recipeName").value.trim();
+        const ingredients = document.getElementById("ingredients").value.trim();
+        const instructions = document.getElementById("instructions").value.trim();
+
+        if (name === "" || ingredients === "" || instructions === "") {
+
+            alert("Please fill out every field.");
+            return;
+        }
+
+        recipes.push({
+            name: name,
+            ingredients: ingredients,
+            instructions: instructions
+        });
+
+        document.getElementById("recipeName").value = "";
+        document.getElementById("ingredients").value = "";
+        document.getElementById("instructions").value = "";
+
+        displayRecipes(recipes);
+    };
+
+    // ------------------------------
+    // Search Recipes
+    // ------------------------------
+    if (searchInput) {
+
+        searchInput.addEventListener("keyup", function () {
+
+            const text = this.value.toLowerCase();
+
+            const filteredRecipes = recipes.filter(recipe =>
+                recipe.name.toLowerCase().includes(text)
+            );
+
+            displayRecipes(filteredRecipes);
+        });
+
+    }
+
+    // ------------------------------
+    // Display Recipes
+    // ------------------------------
+    function displayRecipes(recipeArray) {
+
+        recipeList.innerHTML = "";
+
+        recipeArray.forEach(recipe => {
+
+            const card = document.createElement("div");
+
+            card.className = "recipe-card";
+
+            card.innerHTML = `
+                <h3>${recipe.name}</h3>
+
+                <p><strong>Ingredients:</strong><br>${recipe.ingredients}</p>
+
+                <p><strong>Instructions:</strong><br>${recipe.instructions}</p>
+            `;
+
+            recipeList.appendChild(card);
+
+        });
+
+    }
+
+});
