@@ -1,14 +1,33 @@
+/* ------------------------------
+   Global Styles
+------------------------------ */
 * {
     box-sizing: border-box;
+}
+
+:root {
+    --background: #111827;
+    --surface: #1f2937;
+    --surface-light: #374151;
+    --text: #e5e7eb;
+    --muted-text: #9ca3af;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --border: #4b5563;
+    --danger: #ef4444;
 }
 
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f8f3ed;
-    color: #333333;
+    background-color: var(--background);
+    color: var(--text);
 }
 
+
+/* ------------------------------
+   Header
+------------------------------ */
 header {
     display: flex;
     justify-content: space-between;
@@ -17,16 +36,22 @@ header {
 
     padding: 25px 8%;
 
-    background-color: #d35400;
-    color: white;
+    background-color: #0b1220;
+    color: var(--text);
+
+    border-bottom: 4px solid var(--accent);
 }
 
 header h1 {
     margin: 0 0 8px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 header p {
     margin: 0;
+    color: var(--muted-text);
 }
 
 nav {
@@ -34,52 +59,92 @@ nav {
     gap: 10px;
 }
 
+
+/* ------------------------------
+   Main Layout
+------------------------------ */
 main {
     width: 90%;
     max-width: 950px;
-
     margin: 30px auto;
 }
 
+
+/* ------------------------------
+   Buttons
+------------------------------ */
 button {
-    padding: 11px 18px;
+    padding: 12px 20px;
 
     border: none;
     border-radius: 6px;
 
-    background-color: #d35400;
-    color: white;
+    background-color: var(--accent);
+    color: #111827;
 
     font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 button:hover {
-    background-color: #a84300;
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(245, 158, 11, 0.25);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 header button {
-    background-color: white;
-    color: #d35400;
+    background-color: var(--accent);
+    color: #111827;
 }
 
 header button:hover {
-    background-color: #f3e1d6;
+    background-color: var(--accent-hover);
 }
 
+
+/* ------------------------------
+   Form Inputs
+------------------------------ */
 input,
 textarea {
     width: 100%;
 
     margin: 7px 0 16px;
-    padding: 12px;
+    padding: 13px;
 
-    border: 1px solid #cccccc;
+    border: 2px solid var(--border);
     border-radius: 6px;
+
+    background-color: #111827;
+    color: var(--text);
 
     font-family: inherit;
     font-size: 16px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #6b7280;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
 }
 
 textarea {
@@ -89,12 +154,15 @@ textarea {
 
 label {
     display: block;
-
     margin-top: 8px;
-
+    color: var(--text);
     font-weight: bold;
 }
 
+
+/* ------------------------------
+   Login Screen
+------------------------------ */
 .website-content {
     display: none;
 }
@@ -108,28 +176,39 @@ label {
 
     padding: 20px;
 
-    background-color: #f8f3ed;
+    background:
+        linear-gradient(
+            rgba(17, 24, 39, 0.88),
+            rgba(17, 24, 39, 0.96)
+        ),
+        #111827;
 }
 
 .login-box {
     width: 100%;
-    max-width: 380px;
+    max-width: 390px;
 
-    padding: 35px;
+    padding: 36px;
 
+    border: 2px solid var(--accent);
     border-radius: 10px;
 
-    background-color: white;
+    background-color: var(--surface);
 
     text-align: center;
 
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
 }
 
 .login-box h1 {
     margin-top: 0;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-    color: #d35400;
+.login-box p {
+    color: var(--muted-text);
 }
 
 .login-box label {
@@ -142,11 +221,14 @@ label {
 
 .hint {
     margin-bottom: 0;
-
-    color: #777777;
+    color: var(--muted-text);
     font-size: 13px;
 }
 
+
+/* ------------------------------
+   Content Cards
+------------------------------ */
 .recipe-day,
 .search-section,
 .form-section,
@@ -155,32 +237,39 @@ label {
     margin-bottom: 25px;
     padding: 25px;
 
+    border: 1px solid var(--border);
     border-radius: 10px;
 
-    background-color: white;
+    background-color: var(--surface);
 
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 }
 
 .recipe-day {
-    border-left: 8px solid #d35400;
-
-    background-color: #fff8f2;
+    border-left: 8px solid var(--accent);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245, 158, 11, 0.12),
+            rgba(31, 41, 55, 1)
+        );
 }
 
 .daily-label {
     display: inline-block;
 
-    margin: 0 0 8px;
-    padding: 5px 10px;
+    margin: 0 0 10px;
+    padding: 6px 12px;
 
-    border-radius: 20px;
+    border-radius: 4px;
 
-    background-color: #d35400;
-    color: white;
+    background-color: var(--accent);
+    color: #111827;
 
     font-size: 13px;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .recipe-day h2,
@@ -189,15 +278,21 @@ label {
 .recipes-section h2,
 .support-box h2 {
     margin-top: 0;
-
-    color: #d35400;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
 }
 
 .recipe-day h3 {
-    font-size: 25px;
     margin: 12px 0;
+    color: var(--text);
+    font-size: 26px;
 }
 
+
+/* ------------------------------
+   Recipe Cards
+------------------------------ */
 .recipe-list {
     display: grid;
     gap: 18px;
@@ -206,39 +301,75 @@ label {
 .recipe-card {
     padding: 20px;
 
-    border-left: 6px solid #d35400;
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--accent);
     border-radius: 8px;
 
-    background-color: #fffaf6;
+    background-color: #111827;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 .recipe-card h3 {
     margin-top: 0;
-
-    color: #d35400;
+    color: var(--accent);
 }
 
+.recipe-card p {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+
+/* ------------------------------
+   Support Page
+------------------------------ */
 .support-question {
     margin: 20px 0;
-    padding: 15px;
+    padding: 16px;
 
-    border-left: 5px solid #d35400;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--accent);
 
-    background-color: #fffaf6;
+    background-color: #111827;
 }
 
 .support-question h3 {
     margin-top: 0;
+    color: var(--accent);
 }
 
+.support-question p {
+    color: var(--text);
+}
+
+
+/* ------------------------------
+   Empty Search Message
+------------------------------ */
 .no-recipes {
     padding: 15px;
 
+    border: 1px solid var(--accent);
     border-radius: 6px;
 
-    background-color: #fff3e8;
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--text);
 }
 
+
+/* ------------------------------
+   Mobile Layout
+------------------------------ */
 @media screen and (max-width: 650px) {
     header {
         flex-direction: column;
@@ -251,5 +382,17 @@ label {
 
     nav button {
         flex: 1;
+    }
+
+    .login-box {
+        padding: 28px 22px;
+    }
+
+    .recipe-day,
+    .search-section,
+    .form-section,
+    .recipes-section,
+    .support-box {
+        padding: 20px;
     }
 }
