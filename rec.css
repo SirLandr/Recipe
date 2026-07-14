@@ -132,6 +132,10 @@ label {
     color: #d35400;
 }
 
+.login-box label {
+    text-align: left;
+}
+
 .login-box button {
     width: 100%;
 }
@@ -143,6 +147,7 @@ label {
     font-size: 13px;
 }
 
+.recipe-day,
 .search-section,
 .form-section,
 .recipes-section,
@@ -157,6 +162,28 @@ label {
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
+.recipe-day {
+    border-left: 8px solid #d35400;
+
+    background-color: #fff8f2;
+}
+
+.daily-label {
+    display: inline-block;
+
+    margin: 0 0 8px;
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background-color: #d35400;
+    color: white;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.recipe-day h2,
 .search-section h2,
 .form-section h2,
 .recipes-section h2,
@@ -164,6 +191,11 @@ label {
     margin-top: 0;
 
     color: #d35400;
+}
+
+.recipe-day h3 {
+    font-size: 25px;
+    margin: 12px 0;
 }
 
 .recipe-list {
