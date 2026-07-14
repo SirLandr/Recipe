@@ -22,28 +22,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const recipeList = document.getElementById("recipeList");
   const searchInput = document.getElementById("searchInput");
 
-  window.login = function () {
+  function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
     if (username === "" || password === "") {
-      alert("Please enter a username and password.");
-      return;
+        alert("Please enter a username and password.");
+        return;
     }
 
-    loginScreen.style.display = "none";
-    websiteContent.style.display = "block";
+    // Save login status
+    localStorage.setItem("loggedIn", "true");
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("websiteContent").style.display = "block";
 
     displayRecipes(recipes);
-  };
+}
 
-  window.logout = function () {
-    loginScreen.style.display = "flex";
-    websiteContent.style.display = "none";
+function logout() {
+
+    // Remove login status
+    localStorage.removeItem("loggedIn");
+
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("websiteContent").style.display = "none";
 
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
-  };
+}
 
   window.addRecipe = function () {
     const name = document.getElementById("recipeName").value;
@@ -95,3 +102,14 @@ document.addEventListener("DOMContentLoaded", function () {
     displayRecipes(filteredRecipes);
   });
 });
+
+window.onload = function () {
+
+    if (localStorage.getItem("loggedIn") === "true") {
+
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("websiteContent").style.display = "block";
+
+        displayRecipes(recipes);
+    }
+
