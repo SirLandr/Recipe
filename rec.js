@@ -1,542 +1,216 @@
-// ------------------------------
-// Default Recipe Data
-// ------------------------------
 const defaultRecipes = [
     {
         name: "Spaghetti",
-        ingredients:
-            "Noodles, tomato sauce, ground beef, and cheese",
-        instructions:
-            "Cook the noodles, prepare the sauce, combine everything, and serve."
+        ingredients: "Noodles, tomato sauce, ground beef, and cheese",
+        instructions: "Cook the noodles, prepare the sauce, combine everything, and serve."
     },
     {
         name: "Chicken Tacos",
-        ingredients:
-            "Chicken, tortillas, lettuce, cheese, and salsa",
-        instructions:
-            "Cook the chicken, place it in the tortillas, add toppings, and enjoy."
+        ingredients: "Chicken, tortillas, lettuce, cheese, and salsa",
+        instructions: "Cook the chicken, place it in tortillas, add toppings, and enjoy."
     },
     {
         name: "Pancakes",
-        ingredients:
-            "Flour, eggs, milk, sugar, and baking powder",
-        instructions:
-            "Mix the ingredients and cook the batter on a skillet."
-    },
-    {
-        name: "Grilled Cheese",
-        ingredients:
-            "Bread, cheese, and butter",
-        instructions:
-            "Butter the bread, add cheese, and cook both sides in a skillet until golden."
-    },
-    {
-        name: "Chicken Alfredo",
-        ingredients:
-            "Chicken, fettuccine noodles, Alfredo sauce, and Parmesan cheese",
-        instructions:
-            "Cook the chicken and noodles, warm the sauce, combine everything, and serve."
-    },
-    {
-        name: "Chocolate Chip Cookies",
-        ingredients:
-            "Flour, sugar, butter, eggs, baking soda, and chocolate chips",
-        instructions:
-            "Mix the ingredients, form the dough into small portions, and bake until golden."
-    },
-    {
-        name: "Garden Salad",
-        ingredients:
-            "Lettuce, tomatoes, cucumbers, carrots, cheese, and salad dressing",
-        instructions:
-            "Wash and cut the vegetables, combine them in a bowl, and add dressing."
+        ingredients: "Flour, eggs, milk, sugar, and baking powder",
+        instructions: "Mix the ingredients and cook the batter on a skillet."
     }
 ];
 
-
-// Load saved recipes, or use the default list
-let recipes = loadRecipes();
-
-
-// ------------------------------
-// Load Recipes
-// ------------------------------
 function loadRecipes() {
-    const savedRecipes =
-        localStorage.getItem("recipes");
+    const savedRecipes = localStorage.getItem("recipes");
 
-    if (savedRecipes) {
-        try {
-            return JSON.parse(savedRecipes);
-        } catch (error) {
-            console.error(
-                "The saved recipe data could not be read.",
-                error
-            );
-        }
+    if (!savedRecipes) {
+        return [...defaultRecipes];
     }
 
-    return defaultRecipes;
+    try {
+        const parsedRecipes = JSON.parse(savedRecipes);
+        return Array.isArray(parsedRecipes) ? parsedRecipes : [...defaultRecipes];
+    } catch (error) {
+        console.error("Saved recipes could not be loaded.", error);
+        return [...defaultRecipes];
+    }
 }
 
+let recipes = loadRecipes();
 
-// ------------------------------
-// Save Recipes
-// ------------------------------
-function saveRecipes() {
-    localStorage.setItem(
-        "recipes",
-        JSON.stringify(recipes)
-    );
-}
+document.addEventListener("DOMContentLoaded", function () {
+    const loginScreen = document.getElementById("loginScreen");
+    const websiteContent = document.getElementById("websiteContent");
+    const loginForm = document.getElementById("loginForm");
+    const logoutButton = document.getElementById("logoutButton");
+    const recipeForm = document.getElementById("recipeForm");
+    const recipeList = document.getElementById("recipeList");
+    const searchInput = document.getElementById("searchInput");
+    const recipeMessage = document.getElementById("recipeMessage");
+    const contactForm = document.getElementById("contactForm");
+    const contactStatus = document.getElementById("contactStatus");
 
-
-// ------------------------------
-// Wait for the Page to Load
-// ------------------------------
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const loginScreen =
-            document.getElementById("loginScreen");
-
-        const websiteContent =
-            document.getElementById("websiteContent");
-
-        const recipeList =
-            document.getElementById("recipeList");
-
-        const searchInput =
-            document.getElementById("searchInput");
-
-        const dailyRecipeName =
-            document.getElementById("dailyRecipeName");
-
-        const dailyIngredients =
-            document.getElementById("dailyIngredients");
-
-        const dailyInstructions =
-            document.getElementById(
-                "dailyInstructions"
-            );
-
-
-        // ------------------------------
-        // Stay Logged In
-        // ------------------------------
-        if (
-            localStorage.getItem("loggedIn") ===
-            "true"
-        ) {
-            showHomeScreen();
+    function showHomeScreen() {
+        if (loginScreen) {
+            loginScreen.style.display = "none";
         }
 
+        if (websiteContent) {
+            websiteContent.style.display = "block";
+        }
 
-        // ------------------------------
-        // Login
-        // ------------------------------
-        window.login = function () {
-            const usernameInput =
-                document.getElementById("username");
+        displayRecipes(recipes);
+        showRecipeOfTheDay();
+    }
 
-            const passwordInput =
-                document.getElementById("password");
+    if (
+        loginScreen &&
+        websiteContent &&
+        localStorage.getItem("loggedIn") === "true"
+    ) {
+        showHomeScreen();
+    }
 
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            if (
-                !usernameInput ||
-                !passwordInput
-            ) {
-                alert(
-                    "The login fields could not be found."
-                );
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
 
+            if (username.length < 2 || password.length < 2) {
+                alert("Enter a username and password with at least two characters.");
                 return;
             }
 
-
-            const username =
-                usernameInput.value.trim();
-
-            const password =
-                passwordInput.value.trim();
-
-
-            if (
-                username === "" ||
-                password === ""
-            ) {
-                alert(
-                    "Please enter a username and password."
-                );
-
-                return;
-            }
-
-
-            localStorage.setItem(
-                "loggedIn",
-                "true"
-            );
-
+            localStorage.setItem("loggedIn", "true");
             showHomeScreen();
-        };
+        });
+    }
 
-
-        // ------------------------------
-        // Logout
-        // ------------------------------
-        window.logout = function () {
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function () {
             localStorage.removeItem("loggedIn");
 
             if (loginScreen) {
-                loginScreen.style.display =
-                    "flex";
+                loginScreen.style.display = "grid";
             }
 
             if (websiteContent) {
-                websiteContent.style.display =
-                    "none";
+                websiteContent.style.display = "none";
             }
+        });
+    }
 
-            const usernameInput =
-                document.getElementById(
-                    "username"
-                );
+    if (recipeForm) {
+        recipeForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            const passwordInput =
-                document.getElementById(
-                    "password"
-                );
+            const name = document.getElementById("recipeName").value.trim();
+            const ingredients = document.getElementById("ingredients").value.trim();
+            const instructions = document.getElementById("instructions").value.trim();
 
-            if (usernameInput) {
-                usernameInput.value = "";
-            }
-
-            if (passwordInput) {
-                passwordInput.value = "";
-            }
-        };
-
-
-        // ------------------------------
-        // Add Recipe
-        // ------------------------------
-        window.addRecipe = function () {
-            const nameInput =
-                document.getElementById(
-                    "recipeName"
-                );
-
-            const ingredientsInput =
-                document.getElementById(
-                    "ingredients"
-                );
-
-            const instructionsInput =
-                document.getElementById(
-                    "instructions"
-                );
-
-
-            if (
-                !nameInput ||
-                !ingredientsInput ||
-                !instructionsInput
-            ) {
-                alert(
-                    "The recipe form could not be found."
-                );
-
+            if (name.length < 2 || ingredients.length < 5 || instructions.length < 10) {
+                recipeMessage.textContent = "Please provide a complete recipe with clear ingredients and instructions.";
                 return;
             }
 
+            recipes.push({ name, ingredients, instructions });
+            localStorage.setItem("recipes", JSON.stringify(recipes));
 
-            const name =
-                nameInput.value.trim();
+            recipeForm.reset();
+            recipeMessage.textContent = "Your recipe was added successfully.";
+            displayRecipes(recipes);
+            showRecipeOfTheDay();
+        });
+    }
 
-            const ingredients =
-                ingredientsInput.value.trim();
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            const searchText = searchInput.value.toLowerCase().trim();
 
-            const instructions =
-                instructionsInput.value.trim();
-
-
-            if (
-                name === "" ||
-                ingredients === "" ||
-                instructions === ""
-            ) {
-                alert(
-                    "Please fill out every field."
+            const filteredRecipes = recipes.filter(function (recipe) {
+                return (
+                    recipe.name.toLowerCase().includes(searchText) ||
+                    recipe.ingredients.toLowerCase().includes(searchText) ||
+                    recipe.instructions.toLowerCase().includes(searchText)
                 );
-
-                return;
-            }
-
-
-            recipes.push({
-                name: name,
-                ingredients: ingredients,
-                instructions: instructions
             });
 
-
-            saveRecipes();
-
-
-            nameInput.value = "";
-
-            ingredientsInput.value = "";
-
-            instructionsInput.value = "";
-
-
-            if (searchInput) {
-                searchInput.value = "";
-            }
-
-
-            displayRecipes(recipes);
-
-            showRecipeOfTheDay();
-        };
-
-
-        // ------------------------------
-        // Search Recipes
-        // ------------------------------
-        if (searchInput) {
-            searchInput.addEventListener(
-                "input",
-                function () {
-
-                    const searchText =
-                        searchInput.value
-                            .toLowerCase()
-                            .trim();
-
-
-                    const filteredRecipes =
-                        recipes.filter(
-                            function (recipe) {
-
-                                const recipeName =
-                                    recipe.name
-                                        .toLowerCase();
-
-                                const ingredients =
-                                    recipe.ingredients
-                                        .toLowerCase();
-
-                                const instructions =
-                                    recipe.instructions
-                                        .toLowerCase();
-
-
-                                return (
-                                    recipeName.includes(
-                                        searchText
-                                    ) ||
-                                    ingredients.includes(
-                                        searchText
-                                    ) ||
-                                    instructions.includes(
-                                        searchText
-                                    )
-                                );
-                            }
-                        );
-
-
-                    displayRecipes(
-                        filteredRecipes
-                    );
-                }
-            );
-        }
-
-
-        // ------------------------------
-        // Show the Home Screen
-        // ------------------------------
-        function showHomeScreen() {
-            if (loginScreen) {
-                loginScreen.style.display =
-                    "none";
-            }
-
-            if (websiteContent) {
-                websiteContent.style.display =
-                    "block";
-            }
-
-            displayRecipes(recipes);
-
-            showRecipeOfTheDay();
-        }
-
-
-        // ------------------------------
-        // Recipe of the Day
-        // ------------------------------
-        function showRecipeOfTheDay() {
-            if (recipes.length === 0) {
-                return;
-            }
-
-
-            const today = new Date();
-
-            const dateNumber =
-                Math.floor(
-                    new Date(
-                        today.getFullYear(),
-                        today.getMonth(),
-                        today.getDate()
-                    ).getTime() /
-                    86400000
-                );
-
-
-            const recipeIndex =
-                dateNumber % recipes.length;
-
-            const dailyRecipe =
-                recipes[recipeIndex];
-
-
-            if (dailyRecipeName) {
-                dailyRecipeName.textContent =
-                    dailyRecipe.name;
-            }
-
-            if (dailyIngredients) {
-                dailyIngredients.textContent =
-                    dailyRecipe.ingredients;
-            }
-
-            if (dailyInstructions) {
-                dailyInstructions.textContent =
-                    dailyRecipe.instructions;
-            }
-        }
-
-
-        // ------------------------------
-        // Display Recipes
-        // ------------------------------
-        function displayRecipes(
-            recipeArray
-        ) {
-            if (!recipeList) {
-                return;
-            }
-
-
-            recipeList.innerHTML = "";
-
-
-            if (recipeArray.length === 0) {
-                recipeList.innerHTML = `
-                    <p class="no-recipes">
-                        No recipes were found.
-                    </p>
-                `;
-
-                return;
-            }
-
-
-            recipeArray.forEach(
-                function (recipe) {
-
-                    const card =
-                        document.createElement(
-                            "article"
-                        );
-
-
-                    card.className =
-                        "recipe-card";
-
-
-                    const title =
-                        document.createElement(
-                            "h3"
-                        );
-
-                    title.textContent =
-                        recipe.name;
-
-
-                    const ingredientsParagraph =
-                        document.createElement(
-                            "p"
-                        );
-
-                    const ingredientsLabel =
-                        document.createElement(
-                            "strong"
-                        );
-
-                    ingredientsLabel.textContent =
-                        "Ingredients: ";
-
-
-                    ingredientsParagraph.appendChild(
-                        ingredientsLabel
-                    );
-
-                    ingredientsParagraph.appendChild(
-                        document.createTextNode(
-                            recipe.ingredients
-                        )
-                    );
-
-
-                    const instructionsParagraph =
-                        document.createElement(
-                            "p"
-                        );
-
-                    const instructionsLabel =
-                        document.createElement(
-                            "strong"
-                        );
-
-                    instructionsLabel.textContent =
-                        "Instructions: ";
-
-
-                    instructionsParagraph.appendChild(
-                        instructionsLabel
-                    );
-
-                    instructionsParagraph.appendChild(
-                        document.createTextNode(
-                            recipe.instructions
-                        )
-                    );
-
-
-                    card.appendChild(title);
-
-                    card.appendChild(
-                        ingredientsParagraph
-                    );
-
-                    card.appendChild(
-                        instructionsParagraph
-                    );
-
-
-                    recipeList.appendChild(
-                        card
-                    );
-                }
-            );
-        }
+            displayRecipes(filteredRecipes);
+        });
     }
-);
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("contactName").value.trim();
+            const email = document.getElementById("contactEmail").value.trim();
+            const topic = document.getElementById("contactTopic").value;
+            const message = document.getElementById("contactMessage").value.trim();
+
+            if (name.length < 2 || !email.includes("@") || topic === "" || message.length < 10) {
+                contactStatus.textContent = "Please complete every field with valid information.";
+                return;
+            }
+
+            contactStatus.textContent = "Thank you. Your message was processed for this class demonstration.";
+            contactForm.reset();
+        });
+    }
+
+    function showRecipeOfTheDay() {
+        const dailyName = document.getElementById("dailyRecipeName");
+        const dailyIngredients = document.getElementById("dailyIngredients");
+        const dailyInstructions = document.getElementById("dailyInstructions");
+
+        if (!dailyName || recipes.length === 0) {
+            return;
+        }
+
+        const today = new Date();
+        const dayNumber = Math.floor(
+            new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime() /
+            86400000
+        );
+
+        const dailyRecipe = recipes[dayNumber % recipes.length];
+
+        dailyName.textContent = dailyRecipe.name;
+        dailyIngredients.textContent = dailyRecipe.ingredients;
+        dailyInstructions.textContent = dailyRecipe.instructions;
+    }
+
+    function displayRecipes(recipeArray) {
+        if (!recipeList) {
+            return;
+        }
+
+        recipeList.replaceChildren();
+
+        if (recipeArray.length === 0) {
+            const message = document.createElement("p");
+            message.textContent = "No recipes were found.";
+            recipeList.appendChild(message);
+            return;
+        }
+
+        recipeArray.forEach(function (recipe) {
+            const card = document.createElement("article");
+            card.className = "recipe-card";
+
+            const title = document.createElement("h3");
+            title.textContent = recipe.name;
+
+            const ingredientText = document.createElement("p");
+            const ingredientLabel = document.createElement("strong");
+            ingredientLabel.textContent = "Ingredients: ";
+            ingredientText.append(ingredientLabel, document.createTextNode(recipe.ingredients));
+
+            const instructionText = document.createElement("p");
+            const instructionLabel = document.createElement("strong");
+            instructionLabel.textContent = "Instructions: ";
+            instructionText.append(instructionLabel, document.createTextNode(recipe.instructions));
+
+            card.append(title, ingredientText, instructionText);
+            recipeList.appendChild(card);
+        });
+    }
+});
