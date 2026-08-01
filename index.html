@@ -2,200 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Recipe Finder</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recipe Finder lets users discover recipes, search ingredients, view a recipe of the day, and add their own meals.">
+    <meta name="keywords" content="recipes, cooking, meals, recipe finder, food">
+    <meta name="author" content="Landen Dale">
+    <title>Recipe Finder | Home</title>
     <link rel="stylesheet" href="rec.css">
 </head>
-
 <body>
-
-    <!-- Login Screen -->
-    <section id="loginScreen" class="login-screen">
-
+    <section id="loginScreen" class="login-screen" aria-labelledby="loginTitle">
         <div class="login-box">
+            <img src="images/logo.svg" alt="Recipe Finder flame and fork logo" class="login-logo">
+            <h1 id="loginTitle">Recipe Finder</h1>
+            <p>Log in to search and share recipes.</p>
 
-            <h1>Recipe Finder</h1>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" required>
 
-            <p>Please log in to continue.</p>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
 
-            <label for="username">Username</label>
+                <button type="submit">Login</button>
+            </form>
 
-            <input
-                type="text"
-                id="username"
-                placeholder="Enter your username"
-            >
-
-            <label for="password">Password</label>
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-            >
-
-            <button
-                type="button"
-                onclick="login()"
-            >
-                Login
-            </button>
-
-            <p class="hint">
-                Enter any username and password.
-            </p>
-
+            <p class="hint">For this class project, any non-empty username and password will work.</p>
         </div>
-
     </section>
 
+    <div id="websiteContent" class="website-content">
+        <header class="site-header">
+            <a class="brand" href="index.html">
+                <img src="images/logo.svg" alt="Recipe Finder logo">
+                <span>Recipe Finder</span>
+            </a>
 
-    <!-- Main Website -->
-    <section id="websiteContent" class="website-content">
-
-        <header>
-
-            <div class="header-text">
-
-                <h1>Recipe Finder</h1>
-
-                <p>
-                    Search recipes or add one of your own.
-                </p>
-
-            </div>
-
-            <nav>
-
-                <button
-                    type="button"
-                    onclick="location.href='Support.html'"
-                >
-                    Support
-                </button>
-
-                <button
-                    type="button"
-                    onclick="logout()"
-                >
-                    Logout
-                </button>
-
+            <nav aria-label="Main navigation">
+                <a class="active" href="index.html">Home</a>
+                <a href="Recipes.html">Recipes</a>
+                <a href="About.html">About</a>
+                <a href="Contact.html">Contact</a>
+                <a href="Support.html">Support</a>
+                <button id="logoutButton" type="button">Logout</button>
             </nav>
-
         </header>
 
-
         <main>
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">Cook. Share. Discover.</p>
+                    <h1>Find your next favorite meal.</h1>
+                    <p>Search recipes by name or ingredient, explore the daily feature, and add your own recipe.</p>
+                    <a class="button-link" href="#searchSection">Start Searching</a>
+                </div>
+                <img src="images/spaghetti.svg" alt="Illustration of a bowl of spaghetti with tomato sauce">
+            </section>
 
-            <!-- Recipe of the Day -->
-            <section class="recipe-day">
-
-                <p class="daily-label">
-                    Featured Recipe
-                </p>
-
-                <h2>Recipe of the Day</h2>
-
+            <section class="panel recipe-day" aria-labelledby="dailyTitle">
+                <p class="badge">Featured Recipe</p>
+                <h2 id="dailyTitle">Recipe of the Day</h2>
                 <h3 id="dailyRecipeName"></h3>
-
-                <p>
-                    <strong>Ingredients:</strong>
-                    <span id="dailyIngredients"></span>
-                </p>
-
-                <p>
-                    <strong>Instructions:</strong>
-                    <span id="dailyInstructions"></span>
-                </p>
-
+                <p><strong>Ingredients:</strong> <span id="dailyIngredients"></span></p>
+                <p><strong>Instructions:</strong> <span id="dailyInstructions"></span></p>
             </section>
 
-
-            <!-- Search Section -->
-            <section class="search-section">
-
-                <h2>Search Recipes</h2>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search by recipe name or ingredient"
-                >
-
+            <section id="searchSection" class="panel" aria-labelledby="searchTitle">
+                <h2 id="searchTitle">Search Recipes</h2>
+                <label for="searchInput">Search by recipe name or ingredient</label>
+                <input id="searchInput" type="search" placeholder="Example: chicken or pancakes">
             </section>
 
+            <section class="panel" aria-labelledby="addRecipeTitle">
+                <h2 id="addRecipeTitle">Add Your Own Recipe</h2>
+                <form id="recipeForm">
+                    <label for="recipeName">Recipe name</label>
+                    <input id="recipeName" name="recipeName" type="text" required maxlength="80">
 
-            <!-- Add Recipe Section -->
-            <section class="form-section">
+                    <label for="ingredients">Ingredients</label>
+                    <textarea id="ingredients" name="ingredients" required maxlength="500"></textarea>
 
-                <h2>Add Your Own Recipe</h2>
+                    <label for="instructions">Instructions</label>
+                    <textarea id="instructions" name="instructions" required maxlength="1000"></textarea>
 
-                <label for="recipeName">
-                    Recipe Name
-                </label>
-
-                <input
-                    type="text"
-                    id="recipeName"
-                    placeholder="Example: Chocolate Cake"
-                >
-
-
-                <label for="ingredients">
-                    Ingredients
-                </label>
-
-                <textarea
-                    id="ingredients"
-                    placeholder="List the ingredients"
-                ></textarea>
-
-
-                <label for="instructions">
-                    Instructions
-                </label>
-
-                <textarea
-                    id="instructions"
-                    placeholder="Explain how to prepare the recipe"
-                ></textarea>
-
-
-                <button
-                    type="button"
-                    onclick="addRecipe()"
-                >
-                    Add Recipe
-                </button>
-
+                    <button type="submit">Add Recipe</button>
+                    <p id="recipeMessage" class="form-message" aria-live="polite"></p>
+                </form>
             </section>
 
-
-            <!-- Recipe List -->
-            <section class="recipes-section">
-
-                <h2>Recipes</h2>
-
-                <div
-                    id="recipeList"
-                    class="recipe-list"
-                ></div>
-
+            <section class="panel" aria-labelledby="recipeListTitle">
+                <h2 id="recipeListTitle">Recipe Results</h2>
+                <div id="recipeList" class="recipe-list"></div>
             </section>
-
         </main>
 
-    </section>
-
+        <footer class="site-footer">
+            <p>&copy; 2026 Landen Dale. Educational project.</p>
+            <div>
+                <a href="https://validator.w3.org/" target="_blank" rel="noopener">Validate HTML</a>
+                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">Validate CSS</a>
+            </div>
+        </footer>
+    </div>
 
     <script src="rec.js"></script>
-
 </body>
 </html>
