@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+<title id="title">Recipe Finder logo</title>
+<desc id="desc">Amber flame surrounding a white fork</desc>
+<rect width="120" height="120" rx="24" fill="#111827"/>
+<path d="M60 14c18 22 28 35 28 53a28 28 0 1 1-56 0c0-13 8-24 18-36 0 13 5 18 10 21 2-15 0-25 0-38z" fill="#F59E0B"/>
+<path d="M54 42v39M47 42v17c0 7 5 11 13 11s13-4 13-11V42M66 42v39" fill="none" stroke="#E5E7EB" stroke-width="6" stroke-linecap="round"/>
+</svg>

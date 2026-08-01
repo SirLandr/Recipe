@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 375" role="img" aria-labelledby="title desc">
+<title id="title">Spaghetti illustration</title><desc id="desc">A bowl of spaghetti with red tomato sauce</desc>
+<rect width="500" height="375" fill="#111827"/>
+<ellipse cx="250" cy="250" rx="165" ry="70" fill="#E5E7EB"/>
+<ellipse cx="250" cy="228" rx="140" ry="53" fill="#F59E0B"/>
+<path d="M145 220c35-45 60 35 95-8s60 35 95-8 50 20 60 5M150 240c30-35 55 25 90-7s70 25 110-8" fill="none" stroke="#D97706" stroke-width="14" stroke-linecap="round"/>
+<circle cx="225" cy="205" r="35" fill="#B91C1C"/><circle cx="285" cy="215" r="31" fill="#B91C1C"/>
+</svg>

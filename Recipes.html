@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse featured Recipe Finder meals, cooking times, difficulty levels, and recipe images.">
+    <meta name="keywords" content="featured recipes, cooking time, easy meals, dinner ideas">
+    <meta name="author" content="Landen Dale">
+    <title>Recipe Finder | Recipes</title>
+    <link rel="stylesheet" href="rec.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html">
+            <img src="images/logo.svg" alt="Recipe Finder logo">
+            <span>Recipe Finder</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="Recipes.html">Recipes</a>
+            <a href="About.html">About</a>
+            <a href="Contact.html">Contact</a>
+            <a href="Support.html">Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-heading">
+            <p class="eyebrow">Featured meals</p>
+            <h1>Popular Recipes</h1>
+            <p>Three beginner-friendly meals with simple ingredients and preparation steps.</p>
+        </section>
+
+        <section class="image-grid" aria-label="Featured recipe images">
+            <article class="image-card">
+                <img src="images/spaghetti.svg" alt="Illustration of spaghetti in a bowl">
+                <h2>Spaghetti</h2>
+                <p>A quick pasta dinner with tomato sauce, beef, and cheese.</p>
+            </article>
+            <article class="image-card">
+                <img src="images/tacos.svg" alt="Illustration of two chicken tacos">
+                <h2>Chicken Tacos</h2>
+                <p>Seasoned chicken served in tortillas with fresh toppings.</p>
+            </article>
+            <article class="image-card">
+                <img src="images/pancakes.svg" alt="Illustration of pancakes topped with syrup">
+                <h2>Pancakes</h2>
+                <p>A simple breakfast recipe that is ready in about fifteen minutes.</p>
+            </article>
+        </section>
+
+        <section class="panel" aria-labelledby="tableTitle">
+            <h2 id="tableTitle">Recipe Comparison</h2>
+            <div class="table-wrap">
+                <table>
+                    <caption>Cooking time and difficulty for featured recipes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Recipe</th>
+                            <th scope="col">Meal</th>
+                            <th scope="col">Cooking Time</th>
+                            <th scope="col">Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Spaghetti</td>
+                            <td>Dinner</td>
+                            <td>30 minutes</td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>Chicken Tacos</td>
+                            <td>Lunch or Dinner</td>
+                            <td>20 minutes</td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>Pancakes</td>
+                            <td>Breakfast</td>
+                            <td>15 minutes</td>
+                            <td>Easy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Landen Dale. Educational project.</p>
+        <div>
+            <a href="https://validator.w3.org/" target="_blank" rel="noopener">Validate HTML</a>
+            <a href="https://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">Validate CSS</a>
+        </div>
+    </footer>
+</body>
+</html>

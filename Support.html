@@ -2,127 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Recipe Finder Support</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find Recipe Finder help, frequently asked questions, trusted cooking resources, and website validation links.">
+    <meta name="keywords" content="Recipe Finder support, cooking resources, recipe help">
+    <meta name="author" content="Landen Dale">
+    <title>Recipe Finder | Support</title>
     <link rel="stylesheet" href="rec.css">
 </head>
-
 <body>
-
-    <header>
-
-        <div class="header-text">
-
-            <h1>Recipe Finder Support</h1>
-
-            <p>
-                Find help using the Recipe Finder website.
-            </p>
-
-        </div>
-
+    <header class="site-header">
+        <a class="brand" href="index.html">
+            <img src="images/logo.svg" alt="Recipe Finder logo">
+            <span>Recipe Finder</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="Recipes.html">Recipes</a>
+            <a href="About.html">About</a>
+            <a href="Contact.html">Contact</a>
+            <a class="active" href="Support.html">Support</a>
+        </nav>
     </header>
 
-
     <main>
-
-        <section class="support-box">
-
-            <h2>Need Help?</h2>
-
-            <p>
-                This page answers common questions about using
-                Recipe Finder.
-            </p>
-
-
-            <div class="support-question">
-
-                <h3>How do I log in?</h3>
-
-                <p>
-                    Enter any username and password on the login
-                    screen, and then select the Login button.
-                </p>
-
-            </div>
-
-
-            <div class="support-question">
-
-                <h3>How does Recipe of the Day work?</h3>
-
-                <p>
-                    The website automatically selects one recipe
-                    from the recipe list each day.
-                </p>
-
-            </div>
-
-
-            <div class="support-question">
-
-                <h3>How do I search for a recipe?</h3>
-
-                <p>
-                    Use the search box on the home page. You can
-                    search by recipe name or by ingredient.
-                </p>
-
-            </div>
-
-
-            <div class="support-question">
-
-                <h3>How do I add a recipe?</h3>
-
-                <p>
-                    Enter the recipe name, ingredients, and
-                    instructions. Then select Add Recipe.
-                </p>
-
-            </div>
-
-
-            <div class="support-question">
-
-                <h3>Why did my added recipe disappear?</h3>
-
-                <p>
-                    This basic version saves added recipes in the
-                    browser. Clearing browser data may remove them.
-                </p>
-
-            </div>
-
-
-            <div class="support-question">
-
-                <h3>Contact Support</h3>
-
-                <p>
-                    Email: support@recipefinder.com
-                </p>
-
-            </div>
-
-
-            <button
-                type="button"
-                onclick="location.href='index.html'"
-            >
-                Return Home
-            </button>
-
+        <section class="page-heading">
+            <p class="eyebrow">Help center</p>
+            <h1>Recipe Finder Support</h1>
+            <p>Use these answers and resources to get the most from the website.</p>
         </section>
 
+        <section class="panel">
+            <h2>Frequently Asked Questions</h2>
+            <dl class="faq-list">
+                <dt>How do I search?</dt>
+                <dd>Enter a recipe name, ingredient, or instruction in the search box on the home page.</dd>
+
+                <dt>How do I add a recipe?</dt>
+                <dd>Complete every field in the Add Your Own Recipe form and select Add Recipe.</dd>
+
+                <dt>Why does the site remember my login?</dt>
+                <dd>The class project stores a simple login flag in localStorage so returning from this page opens the home screen.</dd>
+
+                <dt>Is this a secure production login?</dt>
+                <dd>No. A production website should use server-side authentication, password hashing, HTTPS, and secure sessions.</dd>
+            </dl>
+        </section>
+
+        <section class="panel">
+            <h2>Trusted External Resources</h2>
+            <ul class="resource-list">
+                <li><a href="https://www.myplate.gov/" target="_blank" rel="noopener">USDA MyPlate nutrition guidance</a></li>
+                <li><a href="https://www.foodsafety.gov/" target="_blank" rel="noopener">FoodSafety.gov safety information</a></li>
+                <li><a href="https://www.allrecipes.com/" target="_blank" rel="noopener">Allrecipes cooking inspiration</a></li>
+            </ul>
+        </section>
+
+        <a class="button-link" href="index.html">Return Home</a>
     </main>
 
+    <footer class="site-footer">
+        <p>&copy; 2026 Landen Dale. Educational project.</p>
+        <div>
+            <a href="https://validator.w3.org/" target="_blank" rel="noopener">Validate HTML</a>
+            <a href="https://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">Validate CSS</a>
+        </div>
+    </footer>
 </body>
 </html>

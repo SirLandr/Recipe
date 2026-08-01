@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 375" role="img" aria-labelledby="title desc">
+<title id="title">Pancakes illustration</title><desc id="desc">A stack of pancakes with syrup and butter</desc>
+<rect width="500" height="375" fill="#111827"/>
+<ellipse cx="250" cy="285" rx="170" ry="45" fill="#E5E7EB"/>
+<ellipse cx="250" cy="250" rx="135" ry="45" fill="#D97706"/>
+<rect x="115" y="205" width="270" height="48" rx="24" fill="#F59E0B"/>
+<ellipse cx="250" cy="205" rx="135" ry="45" fill="#FBBF24"/>
+<path d="M180 190c30 20 50 10 70 0s45-10 75 8" fill="none" stroke="#92400E" stroke-width="14" stroke-linecap="round"/>
+<rect x="225" y="160" width="55" height="38" rx="8" fill="#FEF3C7"/>
+</svg>

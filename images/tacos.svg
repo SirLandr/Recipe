@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 375" role="img" aria-labelledby="title desc">
+<title id="title">Chicken tacos illustration</title><desc id="desc">Two tacos filled with chicken and vegetables</desc>
+<rect width="500" height="375" fill="#111827"/>
+<path d="M85 265a120 120 0 0 1 240 0z" fill="#F59E0B"/>
+<path d="M180 265a120 120 0 0 1 240 0z" fill="#D97706"/>
+<g fill="#22C55E"><circle cx="170" cy="210" r="22"/><circle cx="230" cy="195" r="18"/><circle cx="300" cy="215" r="20"/><circle cx="350" cy="200" r="18"/></g>
+<g fill="#EF4444"><circle cx="205" cy="225" r="16"/><circle cx="325" cy="230" r="16"/></g>
+<g fill="#E5E7EB"><rect x="150" y="180" width="45" height="24" rx="8"/><rect x="265" y="185" width="50" height="24" rx="8"/></g>
+</svg>
